@@ -1,0 +1,66 @@
+<div>
+	<p>
+		The coma separated list of parameters to enrich the command.
+	</p>
+	
+	<p>
+		<strong>Format supported:</strong>
+		<br/>
+		paramName=paramValue,paramName=paramValue...
+	</p>
+	
+	<p>
+		The parameter names will be replaced in the variables of the Ansible command throuhg a look of <em>{{ paramName }}</em>
+	</p>
+	
+	<strong>Ansible configuration file:</strong><br />
+<pre>
+project: projectName
+
+properties:
+  playbook: somePlaybook
+
+inventory:
+  - inventoryFile
+
+vars:
+  generalVariable: generalVariableValue
+
+types:
+  - name: vmType
+		hosts:
+			- host1
+			- host2
+    vars:
+      specificVariable: specificVariableValue
+			anotherVariableWithFiltering: {{ filteringToDo }}
+</pre>
+	
+	<p>
+		And the following configuration: <strong>filteringToDo=someValue</strong>
+	</p>
+	
+	<p>
+		In this case, the <em>{{ filteringToDo }}</em> will be replaced by <em>someValue</em>
+	</p>
+	
+	<p>
+		There is a list of specific placeholder that will have a specific behavior. 
+		These variables are replaced in a specific way described in the following table.
+	</p>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>Variable name</th>
+				<th>Behavior</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><strong>host</strong></td>
+				<td>Is the index in the list of hosts present on the VM type.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
